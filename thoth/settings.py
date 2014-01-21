@@ -82,6 +82,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Media Root
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_URL = '/media/'
 
 # Heroku Preparation
 # Parse database configuration from $DATABASE_URL
