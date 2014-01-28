@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block login %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form action="{{ authtools.views.login }}" method="post" >
+{% csrf_token %}
+{% bootstrap_form form %}
+{% buttons submit="Login" %}{% endbuttons %}
+<input type="hidden" name="next" value="{{ next }}" />
+<a href="{% url 'password_reset' %}">Forgot password?</a>
+</form>
+
+{% endblock %}

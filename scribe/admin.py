@@ -1,3 +1,6 @@
 from django.contrib import admin
+from scribe.models import Email, Template, Header
 
-# Register your models here.
+admin.site.register(Email)
+admin.site.register(Template)
+admin.site.register(Header)

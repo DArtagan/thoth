@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.name }}
+{% endblock %}
+
+{% block add_link %}
+<a href="{{ email_create }}"><span class="glyphicon glyphicon-plus"></span></a>
+{% endblock %}
+
+{% block edit_link %}
+<li><a href="{{ object.get_update_url }}">Edit</a></li>
+{% endblock %}
+
+{% block content %}
+  <p>{{ object.content }}</p>
+{% endblock %}

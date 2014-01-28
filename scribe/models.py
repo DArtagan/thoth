@@ -16,6 +16,10 @@ class Template(models.Model):
     def get_delete_url(self):
         return reverse('template_delete', args=[self.pk])
 
+    def __unicode__(self):
+        return self.name
+
+
 class Header(models.Model):
     name = models.CharField(max_length=50)
     date_added = models.DateField(auto_now_add=True)
@@ -30,6 +34,10 @@ class Header(models.Model):
     def get_delete_url(self):
         return reverse('header_delete', args=[self.pk])
 
+    def __unicode__(self):
+        return self.name
+
+
 class Email(models.Model):
     name = models.CharField(max_length=100)
     #creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
@@ -38,10 +46,13 @@ class Email(models.Model):
     content = models.TextField(blank=True)
 
     def get_absolute_url(self):
-        return reverse('email_detail', args=[self.pk])
+        return reverse('scribe:email:email_detail', args=[self.pk])
 
     def get_update_url(self):
-        return reverse('email_update', args=[self.pk])
+        return reverse('scribe:email:email_update', args=[self.pk])
 
     def get_delete_url(self):
-        return reverse('email_delete', args=[self.pk])
+        return reverse('scribe:email:email_delete', args=[self.pk])
+
+    def __unicode__(self):
+        return self.name

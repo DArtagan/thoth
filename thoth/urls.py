@@ -1,12 +1,12 @@
 from django.conf.urls import patterns, include, url
+from thoth.views import Index
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'thoth.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', Index.as_view(), name='index'),
+    url(r'^accounts/', include('authtools.urls')),
+    url(r'^scribe/', include('scribe.urls', namespace="scribe")),
 )

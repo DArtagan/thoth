@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+Emails
+{% endblock %}
+
+{% block add_link %}
+<li>
+  <a href="{% url 'scribe:email:email_create' %}">
+    <span class="glyphicon glyphicon-plus"></span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+  {% include "email/table.html" with emails=object_list only %}
+{% endblock %}

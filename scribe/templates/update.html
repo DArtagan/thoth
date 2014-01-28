@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<form action="." method="POST">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <button class="btn btn-primary" type="submit">Ok</button>
+  <a class="btn" href="{{ object.get_delete_url }}">Delete</a>
+</form>
+{% endblock %}

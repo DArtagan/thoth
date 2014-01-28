@@ -1,0 +1,22 @@
+{% if emails %}
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Template</th>
+      <th>Last Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in emails %}
+      <tr>
+        <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+        <td>{{ object.template }}</td>
+        <td>{{ object.last_updated }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Looks like there aren't any emails yet, <a href="{% url 'scribe:email:email_create' %}">create one</a>?</p>
+{% endif %}
