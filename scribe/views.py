@@ -23,7 +23,7 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
         context = super(EmailDetail, self).get_context_data(**kwargs)
         from django.templatetags.static import static
         print(static(context['object'].template.template.url))
-        with open(context['object'].template.template.url[1:]) as content_file:
+        with open(context['object'].template.template.url) as content_file:
             contents = content_file.read()
             contents = contents.replace("{ CONTENTS HERE }", context['object'].content)
             contents = contents.replace("{ BANNER HERE }", context['object'].header.image.url)
