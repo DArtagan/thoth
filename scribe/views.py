@@ -4,7 +4,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from guardian.mixins import LoginRequiredMixin
 from django.conf import settings
-import os
 
 from scribe.models import Template, Header, Email
 
@@ -22,10 +21,6 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EmailDetail, self).get_context_data(**kwargs)
-        context['object'].name = 'Joe'
-        # context['render'] = resolve(context['object'].template.template.url)
-        print(context['object'].template.template.url)
-        print(settings.BASE_DIR)
         with open(context['object'].template.template.url[1:]) as content_file:
             contents = content_file.read()
             contents = contents.replace("{ CONTENTS HERE }", context['object'].content)
