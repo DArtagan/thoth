@@ -103,8 +103,7 @@ STATICFILES_DIRS = (
 
 # Media
 MEDIA_ROOT = 'media'
-# MEDIA_URL = '/media/'
-MEDIA_URL = 'http://127.0.0.1/media/'
+MEDIA_URL = '/media/'
 
 # Heroku
 # Parse database configuration from $DATABASE_URL
@@ -114,7 +113,6 @@ if os.getcwd() == "/app":
     DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
-    MEDIA_URL = 'http://secure-thicket-4638.herokuapp.com/media/'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
