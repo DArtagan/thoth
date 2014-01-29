@@ -10,7 +10,7 @@ from scribe.models import Template, Header, Email
 class TemplateMixin(object):
     model = Template
     def get_success_url(self):
-        return reverse('template_detail', kwargs={'pk': self.object.pk})
+        return reverse('scribe:template:template_detail', kwargs={'pk': self.object.pk})
     # def get_queryset(self):
     #     return Template.objects.filter(template__user-self.request.user)
     
@@ -35,22 +35,22 @@ class TemplateDelete(LoginRequiredMixin, TemplateMixin, DeleteView):
 class HeaderMixin(object):
     model = Header
     def get_success_url(self):
-        return reverse('header_detail', kwargs={'pk': self.object.pk})
+        return reverse('scribe:header:header_detail', kwargs={'pk': self.object.pk})
 
 class HeaderIndex(LoginRequiredMixin, HeaderMixin, ListView):
-    header_name = 'header/index.html'
+    template_name = 'header/index.html'
 
 class HeaderDetail(LoginRequiredMixin, HeaderMixin, DetailView):
-    header_name = 'header/detail.html'
+    template_name = 'header/detail.html'
 
 class HeaderCreate(LoginRequiredMixin, HeaderMixin, CreateView):
-    header_name = 'create.html'
+    template_name = 'create.html'
 
 class HeaderUpdate(LoginRequiredMixin, HeaderMixin, UpdateView):
-    header_name = 'update.html'
+    template_name = 'update.html'
 
 class HeaderDelete(LoginRequiredMixin, HeaderMixin, DeleteView):
-    header_name = 'confirm_delete.html'
+    template_name = 'confirm_delete.html'
     def get_success_url(self):
         return reverse('header_index')
 

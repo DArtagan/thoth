@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+Headers
+{% endblock %}
+
+{% block add_link %}
+<li>
+  <a href="{% url 'scribe:header:header_create' %}">
+    <span class="glyphicon glyphicon-plus"></span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+  {% include "header/table.html" with headers=object_list only %}
+{% endblock %}

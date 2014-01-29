@@ -8,13 +8,13 @@ class Template(models.Model):
     template = models.FileField(upload_to='templates')
     
     def get_absolute_url(self):
-        return reverse('template_detail', args=[self.pk])
+        return reverse('scribe:template:template_detail', args=[self.pk])
 
     def get_update_url(self):
-        return reverse('template_update', args=[self.pk])
+        return reverse('scribe:template:template_update', args=[self.pk])
 
     def get_delete_url(self):
-        return reverse('template_delete', args=[self.pk])
+        return reverse('scribe:template:template_delete', args=[self.pk])
 
     def __unicode__(self):
         return self.name
@@ -26,13 +26,13 @@ class Header(models.Model):
     image = models.ImageField(upload_to='headers')
     
     def get_absolute_url(self):
-        return reverse('header_detail', args=[self.pk])
+        return reverse('scribe:header:header_detail', args=[self.pk])
 
     def get_update_url(self):
-        return reverse('header_update', args=[self.pk])
+        return reverse('scribe:header:header_update', args=[self.pk])
 
     def get_delete_url(self):
-        return reverse('header_delete', args=[self.pk])
+        return reverse('scribe:header:header_delete', args=[self.pk])
 
     def __unicode__(self):
         return self.name

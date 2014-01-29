@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block add_link %}
-<li><a href="{% url 'scribe:email:email_create' %}"><span class="glyphicon glyphicon-plus"></span></a></li>
+<li><a href="{% url 'scribe:template:template_create' %}"><span class="glyphicon glyphicon-plus"></span></a></li>
 {% endblock %}
 
 {% block edit_link %}
@@ -13,5 +13,6 @@
 {% endblock %}
 
 {% block content %}
-  <p>{{ object.content }}</p>
+  <p>Date Added: {{ object.date_added }}</p>
+  <p>{{ object.template }}</p>
 {% endblock %}

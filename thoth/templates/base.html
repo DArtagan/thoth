@@ -26,6 +26,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'scribe:email:email_index' %}">Emails</a></li>
+            <li><a href="{% url 'scribe:template:template_index' %}">Templates</a></li>
+            <li><a href="{% url 'scribe:header:header_index' %}">Headers</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% block edit_link %}{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+Templates
+{% endblock %}
+
+{% block add_link %}
+<li>
+  <a href="{% url 'scribe:template:template_create' %}">
+    <span class="glyphicon glyphicon-plus"></span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+  {% include "template/table.html" with templates=object_list only %}
+{% endblock %}
