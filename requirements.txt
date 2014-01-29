@@ -2,7 +2,7 @@ Django==1.6.1
 Pillow==2.3.0
 South==0.8.4
 dj-database-url==0.2.2
-dj-static==0.0.6
+-e git://github.com/kennethreitz/dj-static.git@a7810a80b5c43e4296c952f7f171a332d3150a25#egg=dj_static-origin/HEAD
 django-authtools==0.2.1
 django-bootstrap3==2.5.6
 django-guardian==1.1.1
