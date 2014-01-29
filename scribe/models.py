@@ -44,7 +44,7 @@ class Email(models.Model):
     #creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
     template = models.ForeignKey(Template)
     header = models.ForeignKey(Header)
-    content = HTMLField(blank=True)
+    content = HTMLField()
 
     def get_absolute_url(self):
         return reverse('scribe:email:email_detail', args=[self.pk])
