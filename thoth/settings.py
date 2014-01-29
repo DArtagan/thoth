@@ -111,7 +111,7 @@ import dj_database_url
 import os
 if os.getcwd() == "/app":
     DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
-    DEBUG = False
+    DEBUG = True
     TEMPLATE_DEBUG = DEBUG
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
