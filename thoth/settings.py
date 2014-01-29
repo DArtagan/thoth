@@ -93,32 +93,28 @@ TEMPLATE_DIRS = (
         os.path.join(PROJECT_PATH, 'templates')
 )
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+# Static
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles' 
+STATICFILES_DIRS = (
+    ('', os.path.join(PROJECT_PATH, 'static')),
+)
 
-# Media Root
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+# Media
+MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
-# Heroku Preparation
+# Heroku
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 import os
 if os.getcwd() == "/app":
     DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
-
-# Static asset configuration
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
