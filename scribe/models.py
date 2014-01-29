@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from tinymce.models import HTMLField
 
 class Template(models.Model):
     name = models.CharField(max_length=50)
@@ -43,7 +44,7 @@ class Email(models.Model):
     #creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
     template = models.ForeignKey(Template)
     header = models.ForeignKey(Header)
-    content = models.TextField(blank=True)
+    content = HTMLField(blank=True)
 
     def get_absolute_url(self):
         return reverse('scribe:email:email_detail', args=[self.pk])

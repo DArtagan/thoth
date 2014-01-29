@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'authtools',
     'guardian',
     'bootstrap3',
+    'tinymce',
     'scribe',
     'accounts',
 )
