@@ -4,7 +4,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from guardian.mixins import LoginRequiredMixin
 from django.conf import settings
-from urllib import request
 
 from scribe.models import Template, Header, Email
 
