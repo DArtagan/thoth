@@ -13,12 +13,14 @@
 {% endblock %}
 
 {% block content %}
-  <p>{{ render|safe }}</p>
   <!-- Button trigger modal -->
-  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  <button style="float: right;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
     Get Gode
   </button>
 
+  <p>Last Updated: {{ object.date_edited }}</p>
+  {{ render|safe }}
+  
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

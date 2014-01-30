@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th></th>
-      <th>Date Added</th>
+      <th>Last Updated</th>
       <th>Image</th>
     </tr>
   </thead>
@@ -11,7 +11,7 @@
     {% for object in headers %}
       <tr>
         <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-        <td>{{ object.date_added }}</td>
+        <td>{{ object.date_edited }}</td>
         <td><img src="{{ object.image.url }}" /></td>
       </tr>
     {% endfor %}

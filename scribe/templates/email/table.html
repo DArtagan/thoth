@@ -4,6 +4,7 @@
     <tr>
       <th></th>
       <th>Template</th>
+      <th>Header</th>
       <th>Last Updated</th>
     </tr>
   </thead>
@@ -11,8 +12,9 @@
     {% for object in emails %}
       <tr>
         <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-        <td>{{ object.template }}</td>
-        <td>{{ object.last_updated }}</td>
+        <td>{{ object.template.name }}</td>
+        <td>{{ object.header.name }}</td>
+        <td>{{ object.date_edited }}</td>
       </tr>
     {% endfor %}
   </tbody>

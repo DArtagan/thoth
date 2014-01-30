@@ -5,8 +5,8 @@ from tinymce.models import HTMLField
 
 class Template(models.Model):
     name = models.CharField(max_length=50)
-    date_added = models.DateField(auto_now_add=True)
-    template = models.FileField(upload_to='templates')
+    date_edited = models.DateField(auto_now=True)
+    template = models.TextField()
     
     def get_absolute_url(self):
         return reverse('scribe:template:template_detail', args=[self.pk])
@@ -23,7 +23,7 @@ class Template(models.Model):
 
 class Header(models.Model):
     name = models.CharField(max_length=50)
-    date_added = models.DateField(auto_now_add=True)
+    date_edited = models.DateField(auto_now=True)
     image = models.ImageField(upload_to='headers')
     
     def get_absolute_url(self):
@@ -42,9 +42,10 @@ class Header(models.Model):
 class Email(models.Model):
     name = models.CharField(max_length=100)
     #creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
+    date_edited = models.DateField(auto_now=True)
     template = models.ForeignKey(Template)
     header = models.ForeignKey(Header)
-    content = HTMLField()
+    content = HTMLField(blank=True)
 
     def get_absolute_url(self):
         return reverse('scribe:email:email_detail', args=[self.pk])

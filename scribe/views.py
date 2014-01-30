@@ -22,12 +22,10 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EmailDetail, self).get_context_data(**kwargs)
-        # with open(context['object'].template.template.url) as content_file:
-        #     contents = content_file.read()
-        #     contents = contents.replace("{ CONTENTS HERE }", context['object'].content)
-        #     contents = contents.replace("{ BANNER HERE }", context['object'].header.image.url)
-        # context['render'] = contents
-        print(open(context['object'].template.template.url))
+        contents = context['object'].template.template
+        contents = contents.replace("{ CONTENTS HERE }", context['object'].content)
+        contents = contents.replace("{ BANNER HERE }", (settings.WEB_URL + context['object'].header.image.url))
+        context['render'] = contents
         return context
 
 class EmailCreate(LoginRequiredMixin, EmailMixin, CreateView):
@@ -39,7 +37,7 @@ class EmailUpdate(LoginRequiredMixin, EmailMixin, UpdateView):
 class EmailDelete(LoginRequiredMixin, EmailMixin, DeleteView):
     template_name = 'confirm_delete.html'
     def get_success_url(self):
-        return reverse('email_index')
+        return reverse('index')
 
 # Templates
 class TemplateMixin(object):

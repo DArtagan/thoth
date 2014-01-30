@@ -13,6 +13,6 @@
 {% endblock %}
 
 {% block content %}
-  <p>Date Added: {{ object.date_added }}</p>
-  <p>{{ object.template }}</p>
+  <p>Last Updated: {{ object.date_edited }}</p>
+  <p>{{ object.template|safe }}</p>
 {% endblock %}

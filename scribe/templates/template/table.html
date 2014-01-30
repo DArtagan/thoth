@@ -3,7 +3,6 @@
   <thead>
     <tr>
       <th></th>
-      <th>Template</th>
       <th>Last Updated</th>
     </tr>
   </thead>
@@ -11,8 +10,7 @@
     {% for object in templates %}
       <tr>
         <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-        <td>{{ object.template }}</td>
-        <td>{{ object.date_added }}</td>
+        <td>{{ object.date_edited }}</td>
       </tr>
     {% endfor %}
   </tbody>
