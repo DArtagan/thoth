@@ -103,7 +103,10 @@ STATICFILES_DIRS = (
 
 # Media
 MEDIA_ROOT = 'media'
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+MEDIA_URL = 'http://127.0.0.1:8000/media/'
+# http://127.0.0.1:8000/media/
+# http://127.0.0.1:8000/media/headers/banner_general_hat_1.jpg
 
 # Heroku
 # Parse database configuration from $DATABASE_URL
