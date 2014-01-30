@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'south',
     'authtools',
     'guardian',
+    'djrill',
     'bootstrap3',
     'tinymce',
     'scribe',
