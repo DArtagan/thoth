@@ -119,6 +119,8 @@ if os.getcwd() == "/app":
     TEMPLATE_DEBUG = DEBUG
     WEB_URL = 'http://secure-thicket-4638.herokuapp.com'
     DEFAULT_FROM_EMAIL = 'app21424083@heroku.com'
+    MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
+    EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
