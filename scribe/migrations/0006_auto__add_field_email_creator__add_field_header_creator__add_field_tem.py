@@ -10,17 +10,17 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Email.creator'
         db.add_column('scribe_email', 'creator',
-                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.User'], default=0, related_name='creator'),
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.User'], default=1, related_name='creator'),
                       keep_default=False)
 
         # Adding field 'Header.creator'
         db.add_column('scribe_header', 'creator',
-                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.User'], default=0),
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.User'], default=1),
                       keep_default=False)
 
         # Adding field 'Template.creator'
         db.add_column('scribe_template', 'creator',
-                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.User'], default=0),
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.User'], default=1),
                       keep_default=False)
 
 
