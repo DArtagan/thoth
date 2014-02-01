@@ -5,8 +5,18 @@ from django.core.urlresolvers import reverse
 from guardian.shortcuts import assign_perm, get_objects_for_user
 from guardian.mixins import LoginRequiredMixin
 from django.conf import settings
+from guardian.models import Group
 
 from scribe.models import Template, Header, Email
+
+# Permission
+def write_permissions(self):
+    groups = [Group.objects.get(name='admin'), Group.objects.get(name='csmaa'), self.request.user]
+    permissions = ['add_email', 'change_email', 'delete_email', 'view_email'];
+    for group in groups:
+        for permission in permissions:
+            assign_perm(permission, group, self.object)
+
 
 # Email
 class EmailMixin(object):
@@ -38,10 +48,7 @@ class EmailCreate(LoginRequiredMixin, EmailMixin, CreateView):
         self.object = form.save(commit=False)
         self.object.creator = self.request.user
         self.object.save()
-        print(get_perms_for_model(self.object))
-        permissions = ['add_email', 'change_email', 'delete_email', 'view_email'];
-        for permission in permissions:
-            assign_perm(permission, self.request.user, self.object)
+        write_permissions(self)
         return redirect(self.object)
 
 class EmailUpdate(LoginRequiredMixin, EmailMixin, UpdateView):
