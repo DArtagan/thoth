@@ -11,11 +11,13 @@ from scribe.models import Template, Header, Email
 
 # Permission
 def write_permissions(self):
-    groups = [Group.objects.get(name='admin'), Group.objects.get(name='csmaa'), self.request.user]
-    permissions = ['add_email', 'change_email', 'delete_email', 'view_email'];
-    for group in groups:
-        for permission in permissions:
-            assign_perm(permission, group, self.object)
+    permission_list = ['add_email', 'change_email', 'delete_email', 'view_email'];
+    for group in Group.objects.all():
+        for permission in permission_list:
+            if group.permissions.filter(codename=permission):
+                assign_perm(permission, group, self.object)
+    for permission in permission_list:
+        assign_perm(permission, self.request.user, self.object)
 
 
 # Email
