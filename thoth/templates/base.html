@@ -38,6 +38,9 @@
               <ul class="dropdown-menu">
                 <li><a href="/accounts/password_reset">Reset Password</a></li>
                 <li><a href="/accounts/update_email">Change Email</a></li>
+                {% if perms.accounts.add_user %}
+                  <li><a href="/accounts/add_user">Add User</a></li>
+                {% endif %}
                 <li><a href="/accounts/logout">Logout</a></li>
               </ul>
             </li>
