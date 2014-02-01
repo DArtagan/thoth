@@ -3,6 +3,9 @@ from guardian.admin import GuardedModelAdmin
 
 from scribe.models import Email, Template, Header
 
-admin.site.register(Email, GuardedModelAdmin)
-admin.site.register(Template, GuardedModelAdmin)
-admin.site.register(Header, GuardedModelAdmin)
+class ProperDisplay(GuardedModelAdmin):
+    list_display = ('__unicode__',)
+
+admin.site.register(Email, ProperDisplay)
+admin.site.register(Template, ProperDisplay)
+admin.site.register(Header, ProperDisplay)

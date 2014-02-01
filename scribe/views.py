@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
+from guardian.shortcuts import assign_perm, get_objects_for_user
 from guardian.mixins import LoginRequiredMixin
 from django.conf import settings
 
@@ -12,6 +13,9 @@ class EmailMixin(object):
     model = Email
     def get_success_url(self):
         return reverse('scribe:email:email_detail', kwargs={'pk': self.object.pk})
+    def get_queryset(self):
+        qs = Email.objects.all()
+        return get_objects_for_user(self.request.user, 'view_email', qs)
 
 class EmailIndex(LoginRequiredMixin, EmailMixin, ListView):
     template_name = 'email/index.html'
@@ -29,6 +33,16 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
 
 class EmailCreate(LoginRequiredMixin, EmailMixin, CreateView):
     template_name = 'create.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.creator = self.request.user
+        self.object.save()
+        print(get_perms_for_model(self.object))
+        permissions = ['add_email', 'change_email', 'delete_email', 'view_email'];
+        for permission in permissions:
+            assign_perm(permission, self.request.user, self.object)
+        return redirect(self.object)
 
 class EmailUpdate(LoginRequiredMixin, EmailMixin, UpdateView):
     template_name = 'update.html'

@@ -5,6 +5,7 @@
       <th></th>
       <th>Template</th>
       <th>Header</th>
+      <th>Creator</th>
       <th>Last Updated</th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
         <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
         <td>{{ object.template.name }}</td>
         <td>{{ object.header.name }}</td>
+        <td>{{ object.creator }}</td>
         <td>{{ object.date_edited }}</td>
       </tr>
     {% endfor %}

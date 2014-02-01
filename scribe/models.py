@@ -7,6 +7,7 @@ class Template(models.Model):
     name = models.CharField(max_length=50)
     date_edited = models.DateField(auto_now=True)
     template = models.TextField()
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
     
     def get_absolute_url(self):
         return reverse('scribe:template:template_detail', args=[self.pk])
@@ -25,6 +26,7 @@ class Header(models.Model):
     name = models.CharField(max_length=50)
     date_edited = models.DateField(auto_now=True)
     image = models.ImageField(upload_to='headers')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
     
     def get_absolute_url(self):
         return reverse('scribe:header:header_detail', args=[self.pk])
@@ -41,11 +43,16 @@ class Header(models.Model):
 
 class Email(models.Model):
     name = models.CharField(max_length=100)
-    #creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
     date_edited = models.DateField(auto_now=True)
     template = models.ForeignKey(Template)
     header = models.ForeignKey(Header)
     content = HTMLField(blank=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='creator')
+
+    class Meta:
+        permissions = (
+            ('view_email', 'View Email'),
+        )
 
     def get_absolute_url(self):
         return reverse('scribe:email:email_detail', args=[self.pk])
