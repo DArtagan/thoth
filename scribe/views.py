@@ -78,6 +78,12 @@ class TemplateDetail(LoginRequiredMixin, TemplateMixin, DetailView):
 class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
     template_name = 'create.html'
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.creator = self.request.user
+        self.object.save()
+        return redirect(self.object)
+
 class TemplateUpdate(LoginRequiredMixin, TemplateMixin, UpdateView):
     template_name = 'update.html'
 
@@ -100,6 +106,12 @@ class HeaderDetail(LoginRequiredMixin, HeaderMixin, DetailView):
 
 class HeaderCreate(LoginRequiredMixin, HeaderMixin, CreateView):
     template_name = 'create.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.creator = self.request.user
+        self.object.save()
+        return redirect(self.object)
 
 class HeaderUpdate(LoginRequiredMixin, HeaderMixin, UpdateView):
     template_name = 'update.html'
