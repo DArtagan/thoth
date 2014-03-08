@@ -121,5 +121,5 @@ ALLOWED_HOSTS = ['*']
 
 # TinyMCE
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins' : 'code, image',
+    'plugins' : 'code, hr, image, paste, table, visualblocks',
 }
