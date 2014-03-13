@@ -1,12 +1,26 @@
 {% extends 'base.html' %}
 
 {% load bootstrap3 %}
+{% load staticfiles %}
 
 {% block content %}
+<script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
+<script>
+  tinymce.init({
+    selector:'textarea',
+    plugins : 'code, hr, image, jbimages, paste, table, visualblocks',
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+  });
+</script>
+
 <form action="." method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {% bootstrap_form form %}
   <button class="btn btn-primary" type="submit">Ok</button>
   <a class="btn" href="{{ object.get_delete_url }}">Delete</a>
+</form>
+<iframe id="form_target" name="form_target" style="display:none"></iframe>
+<form id="my_form" action="upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    <input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
 </form>
 {% endblock %}

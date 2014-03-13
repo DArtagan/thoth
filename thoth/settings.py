@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'guardian',
     'djrill',
     'bootstrap3',
-    'tinymce',
     'scribe',
     'accounts',
 )
@@ -119,12 +118,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# TinyMCE
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins' : 'code, hr, image, paste, table, visualblocks',
-}
-
-# Email
 MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FROM_EMAIL = 'thoth@newsletters.minesalumni.com'
