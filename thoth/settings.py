@@ -127,3 +127,4 @@ TINYMCE_DEFAULT_CONFIG = {
 # Email
 MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = 'thoth@newsletters.minesalumni.com'
