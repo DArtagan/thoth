@@ -30,10 +30,10 @@ class EmailMixin(object):
         return get_objects_for_user(self.request.user, 'view_email', qs)
 
 class EmailIndex(LoginRequiredMixin, EmailMixin, ListView):
-    template_name = 'email/index.html'
+    template_name = 'scribe/email/index.html'
 
 class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
-    template_name = 'email/detail.html'
+    template_name = 'scribe/email/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(EmailDetail, self).get_context_data(**kwargs)
@@ -46,7 +46,7 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
         return context
 
 class EmailCreate(LoginRequiredMixin, EmailMixin, CreateView):
-    template_name = 'create.html'
+    template_name = 'scribe/create.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -56,10 +56,10 @@ class EmailCreate(LoginRequiredMixin, EmailMixin, CreateView):
         return redirect(self.object)
 
 class EmailUpdate(LoginRequiredMixin, EmailMixin, UpdateView):
-    template_name = 'update.html'
+    template_name = 'scribe/update.html'
 
 class EmailDelete(LoginRequiredMixin, EmailMixin, DeleteView):
-    template_name = 'confirm_delete.html'
+    template_name = 'scribe/confirm_delete.html'
     def get_success_url(self):
         return reverse('index')
 
@@ -68,17 +68,15 @@ class TemplateMixin(object):
     model = Template
     def get_success_url(self):
         return reverse('scribe:template:template_detail', kwargs={'pk': self.object.pk})
-    # def get_queryset(self):
-    #     return Template.objects.filter(template__user-self.request.user)
     
 class TemplateIndex(LoginRequiredMixin, TemplateMixin, ListView):
-    template_name = 'template/index.html'
+    template_name = 'scribe/template/index.html'
 
 class TemplateDetail(LoginRequiredMixin, TemplateMixin, DetailView):
-    template_name = 'template/detail.html'
+    template_name = 'scribe/template/detail.html'
 
 class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
-    template_name = 'create.html'
+    template_name = 'scribe/create.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -87,10 +85,10 @@ class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
         return redirect(self.object)
 
 class TemplateUpdate(LoginRequiredMixin, TemplateMixin, UpdateView):
-    template_name = 'update.html'
+    template_name = 'scribe/update.html'
 
 class TemplateDelete(LoginRequiredMixin, TemplateMixin, DeleteView):
-    template_name = 'confirm_delete.html'
+    template_name = 'scribe/confirm_delete.html'
     def get_success_url(self):
         return reverse('template_index')
 
@@ -101,13 +99,13 @@ class HeaderMixin(object):
         return reverse('scribe:header:header_detail', kwargs={'pk': self.object.pk})
 
 class HeaderIndex(LoginRequiredMixin, HeaderMixin, ListView):
-    template_name = 'header/index.html'
+    template_name = 'scribe/header/index.html'
 
 class HeaderDetail(LoginRequiredMixin, HeaderMixin, DetailView):
-    template_name = 'header/detail.html'
+    template_name = 'scribe/header/detail.html'
 
 class HeaderCreate(LoginRequiredMixin, HeaderMixin, CreateView):
-    template_name = 'create.html'
+    template_name = 'scribe/create.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -116,10 +114,10 @@ class HeaderCreate(LoginRequiredMixin, HeaderMixin, CreateView):
         return redirect(self.object)
 
 class HeaderUpdate(LoginRequiredMixin, HeaderMixin, UpdateView):
-    template_name = 'update.html'
+    template_name = 'scribe/update.html'
 
 class HeaderDelete(LoginRequiredMixin, HeaderMixin, DeleteView):
-    template_name = 'confirm_delete.html'
+    template_name = 'scribe/confirm_delete.html'
     def get_success_url(self):
         return reverse('header_index')
 
