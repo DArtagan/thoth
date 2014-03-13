@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'guardian',
     'djrill',
     'bootstrap3',
-    'tinymce',
     'scribe',
     'accounts',
 )
@@ -130,7 +129,3 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# TinyMCE
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins' : 'code, hr, image, paste, table, visualblocks',
-}

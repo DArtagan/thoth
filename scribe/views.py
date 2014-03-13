@@ -19,7 +19,6 @@ def write_permissions(self):
     for permission in permission_list:
         assign_perm(permission, self.request.user, self.object)
 
-
 # Email
 class EmailMixin(object):
     model = Email
