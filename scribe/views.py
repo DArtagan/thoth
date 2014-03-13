@@ -39,7 +39,9 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
         context = super(EmailDetail, self).get_context_data(**kwargs)
         contents = context['object'].template.template
         contents = contents.replace("{ CONTENTS HERE }", context['object'].content)
-        contents = contents.replace("{ BANNER HERE }", (settings.WEB_URL + context['object'].header.image.url))
+        contents = contents.replace("{ HEADER IMAGE }", (settings.WEB_URL + context['object'].header.image.url))
+        contents = contents.replace("{ HEADER NAME }", context['object'].header.name)
+        contents = contents.replace("{ HEADER LINK }", context['object'].header.link)
         context['render'] = contents
         return context
 

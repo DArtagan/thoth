@@ -24,6 +24,7 @@ class Template(models.Model):
 
 class Header(models.Model):
     name = models.CharField(max_length=50)
+    link = models.URLField()
     date_edited = models.DateField(auto_now=True)
     image = models.ImageField(upload_to='headers')
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False)
