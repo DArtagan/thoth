@@ -123,3 +123,7 @@ ALLOWED_HOSTS = ['*']
 TINYMCE_DEFAULT_CONFIG = {
     'plugins' : 'code, hr, image, paste, table, visualblocks',
 }
+
+# Email
+MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
