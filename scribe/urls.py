@@ -29,8 +29,8 @@ header = patterns('',
 )
 
 urlpatterns = patterns('',
-    # Companies
     url(r'^email/', include(email, namespace='email')),
     url(r'^template/', include(template, namespace='template')),
     url(r'^header/', include(header, namespace='header')),
+    url(r'^upload/$', upload, name='upload_image'),
 )

@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView, ListView
+from django.shortcuts import render, redirect, HttpResponse
+from django.http import HttpResponseForbidden
+from django.utils.html import escapejs
+from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from guardian.shortcuts import assign_perm, get_objects_for_user
@@ -8,6 +10,7 @@ from django.conf import settings
 from guardian.models import Group
 
 from scribe.models import Template, Header, Email
+from scribe.forms import UploadImage
 
 # Permission
 def write_permissions(self):
@@ -18,6 +21,16 @@ def write_permissions(self):
                 assign_perm(permission, group, self.object)
     for permission in permission_list:
         assign_perm(permission, self.request.user, self.object)
+
+def upload(request):
+    if request.method == 'POST':
+        form = UploadImage(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save()
+            return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s').closest('.mce-window').find('.mce-primary').click();</script>" % image.get_absolute_url())
+        print('invalid')
+        return HttpResponse("<script>alert('%s');</script>" % escapejs('\n'.join([v[0] for k, v in form.errors.items()])))
+    return HttpResponseForbidden('Allowed only via POST')
 
 # Email
 class EmailMixin(object):

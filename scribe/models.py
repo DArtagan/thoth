@@ -66,3 +66,11 @@ class Email(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Upload(models.Model):
+    image = models.ImageField(upload_to='uploads')
+    # email = ForeignKey(Email)
+
+    def get_absolute_url(self):
+        return self.image.url
+
