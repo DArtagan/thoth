@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'guardian',
     'djrill',
     'bootstrap3',
+    'tinymce',
     'scribe',
     'accounts',
 )
