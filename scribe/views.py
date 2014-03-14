@@ -27,7 +27,7 @@ def upload(request):
         form = UploadImage(request.POST, request.FILES)
         if form.is_valid():
             image = form.save()
-            return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s').closest('.mce-window').find('.mce-primary').click();</script>" % image.get_absolute_url())
+            return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s').closest('.mce-window').find('.mce-primary').click();</script>" % (settings.WEB_URL + image.get_absolute_url()))
         print('invalid')
         return HttpResponse("<script>alert('%s');</script>" % escapejs('\n'.join([v[0] for k, v in form.errors.items()])))
     return HttpResponseForbidden('Allowed only via POST')
