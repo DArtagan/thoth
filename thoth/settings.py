@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'authtools',
     'guardian',
     'djrill',
+    'tinymce',
     'bootstrap3',
     'scribe',
     'accounts',
@@ -121,3 +122,7 @@ ALLOWED_HOSTS = ['*']
 MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FROM_EMAIL = 'thoth@newsletters.minesalumni.com'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins' : 'code, hr, image, paste, table, visualblocks',
+}

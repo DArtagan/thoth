@@ -4,12 +4,13 @@
 {% load staticfiles %}
 
 {% block content %}
-<script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
 <script>
   tinymce.init({
     selector:'textarea',
-    plugins : 'code, hr, image, jbimages, paste, table, visualblocks',
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+    plugins: 'code, hr, image, paste, table, visualblocks',
+    file_browser_callback: function(field_name, url, type, win) {
+        if(type=='image') $('#my_form input').click();
+    }
   });
 </script>
 
@@ -21,6 +22,7 @@
 </form>
 <iframe id="form_target" name="form_target" style="display:none"></iframe>
 <form id="my_form" action="upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    {% csrf_token %}
     <input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
 </form>
 {% endblock %}
