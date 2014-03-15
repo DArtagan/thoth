@@ -7,8 +7,18 @@
     <title>Thoth</title>
     {% bootstrap_css %}
     {% bootstrap_javascript True %}
+    <script type="text/javascript" src="{% static 'tinymce/tinymce.min.js' %}"></script>
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'code, hr, image, paste, table, visualblocks',
+        height: 400,
+        file_browser_callback: function(field_name, url, type, win) {
+            if(type=='image') $('#my_form input').click();
+        }
+      });
+    </script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <script type="text/javascript" src="{{ STATIC_URL }}tinymce/tinymce.min.js"></script>
   </head>
   <body>
     <header class="navbar navbar-fixed-top navbar-inverse">

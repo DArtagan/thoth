@@ -1,19 +1,8 @@
 {% extends 'base.html' %}
 
 {% load bootstrap3 %}
-{% load staticfiles %}
 
 {% block content %}
-<script>
-  tinymce.init({
-    selector:'textarea',
-    plugins: 'code, hr, image, paste, table, visualblocks',
-    file_browser_callback: function(field_name, url, type, win) {
-        if(type=='image') $('#my_form input').click();
-    }
-  });
-</script>
-
 <form action="." method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {% bootstrap_form form %}
