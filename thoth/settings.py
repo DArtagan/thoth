@@ -17,7 +17,7 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8!i#^l@g*o&q9zm2-o==$q+agbl^^k&$6pn780jt)v%vmou(3-'
+SECRET_KEY = 'kvkxs5z1&0c#esfq%huac*n7hb5%b)qc-o801qd-b$)3vu^v6f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,8 +72,10 @@ ANONYMOUS_USER_ID = -1
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'csmaa_thoth',
+        'USER': 'csmaa_thoth',
+        'PASSWORD': 'pqzB2JiGfMCU',
     }
 }
 
@@ -98,7 +100,7 @@ TEMPLATE_DIRS = (
 )
 
 # Web Domain
-WEB_URL = 'http://127.0.0.1:8000'
+WEB_URL = 'http://newsletters.minesalumni.com'
 
 # Static
 STATIC_URL = '/static/'
@@ -110,19 +112,6 @@ STATICFILES_DIRS = (
 # Media
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
-
-# Heroku
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-import os
-if os.getcwd() == "/app":
-    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
-    DEBUG = True
-    TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://secure-thicket-4638.herokuapp.com'
-    DEFAULT_FROM_EMAIL = 'app21424083@heroku.com'
-    MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
-    EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
