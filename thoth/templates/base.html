@@ -23,8 +23,8 @@
         setup: function(editor) {
             editor.on('PostProcess', function(e) {
                 if(e.get) {
-                  e.content = e.content.replace(/(<img ((?!style\=).)+?)(?=>(>)|(\/>))/g, '$1style=""');
-                  e.content = e.content.replace(/(<img .+?style="(?:(?!margin|padding).)*?)(")(.+?>)/g, '$1margin: 10px;"$3');
+                  e.content = e.content.replace(/(<img ((?!style\=).)*?)(?=>(>)|(\/>))/g, '$1style=""');
+                  e.content = e.content.replace(/(<img .*?style="(?:(?!margin|padding).)*?)(")(.*?>)/g, '$1margin: 10px;"$3');
               }
             });
         },
