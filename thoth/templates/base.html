@@ -11,11 +11,22 @@
     <script>
       tinymce.init({
         selector: 'textarea',
-        plugins: 'code, hr, image, paste, table, visualblocks',
+        plugins: 'code, hr, image, paste, table, visualblocks, wordcount',
+        image_advtab: true,
         height: 400,
+        content_css: "{% static 'css/tinymce_content.css' %}",
         file_browser_callback: function(field_name, url, type, win) {
             if(type=='image') $('#my_form input').click();
-        }
+        },
+        setup: function(editor) {
+            editor.on('PostProcess', function(e) {
+                if(e.get) {
+                  e.content = e.content.replace(/(<img ((?!style\=).)+?)(?=>(>)|(\/>))/g, '$1style=""');
+                  e.content = e.content.replace(/(<img .+?style="(?:(?!margin|padding).)*?)(")(.+?>)/g, '$1margin: 10px;"$3');
+              }
+            });
+        },
+
       });
     </script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
