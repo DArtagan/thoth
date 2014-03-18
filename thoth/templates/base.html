@@ -14,6 +14,8 @@
         plugins: 'code, hr, image, paste, table, visualblocks, wordcount',
         image_advtab: true,
         height: 400,
+        relative_urls: false,
+        remove_script_host: false,
         content_css: "{% static 'css/tinymce_content.css' %}",
         file_browser_callback: function(field_name, url, type, win) {
             if(type=='image') $('#my_form input').click();
