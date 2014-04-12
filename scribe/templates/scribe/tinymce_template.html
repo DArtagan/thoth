@@ -3,21 +3,13 @@
 <script>
   tinymce.init({
     selector: 'textarea',
-    plugins: 'advlist, code, hr, image, link, paste, spellchecker, table, visualblocks, wordcount',
+    plugins: 'advlist, code, hr, image, link, paste, table, visualblocks, wordcount',
+    browser_spellcheck: true,
     image_advtab: true,
     height: 400,
     content_css: "{% static 'css/tinymce_content.css' %}",
     file_browser_callback: function(field_name, url, type, win) {
         if(type=='image') $('#my_form input').click();
     },
-    setup: function(editor) {
-        editor.on('PostProcess', function(e) {
-            if(e.get) {
-              e.content = e.content.replace(/(<img ((?!style\=).)*?)(?=>(>)|(\/>))/g, '$1style=""');
-              e.content = e.content.replace(/(<img .*?style="(?:(?!margin|padding).)*?)(")(.*?>)/g, '$1margin: 10px;"$3');
-          }
-        });
-    },
-
   });
 </script>
