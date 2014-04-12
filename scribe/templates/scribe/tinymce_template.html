@@ -10,14 +10,5 @@
     file_browser_callback: function(field_name, url, type, win) {
         if(type=='image') $('#my_form input').click();
     },
-    setup: function(editor) {
-        editor.on('PostProcess', function(e) {
-            if(e.get) {
-              e.content = e.content.replace(/(<img ((?!style\=).)*?)(?=>(>)|(\/>))/g, '$1style=""');
-              e.content = e.content.replace(/(<img .*?style="(?:(?!margin|padding).)*?)(")(.*?>)/g, '$1margin: 10px;"$3');
-          }
-        });
-    },
-
   });
 </script>
