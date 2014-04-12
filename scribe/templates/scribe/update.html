@@ -2,6 +2,10 @@
 
 {% load bootstrap3 %}
 
+{% block tinymce %}
+{% include "scribe/tinymce.html" %}
+{% endblock tinymce %}
+
 {% block content %}
 <form action="." method="POST" enctype="multipart/form-data">
   {% csrf_token %}

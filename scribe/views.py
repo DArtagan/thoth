@@ -88,7 +88,7 @@ class TemplateDetail(LoginRequiredMixin, TemplateMixin, DetailView):
     template_name = 'scribe/template/detail.html'
 
 class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
-    template_name = 'scribe/create.html'
+    template_name = 'scribe/template/create.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -97,7 +97,7 @@ class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
         return redirect(self.object)
 
 class TemplateUpdate(LoginRequiredMixin, TemplateMixin, UpdateView):
-    template_name = 'scribe/update.html'
+    template_name = 'scribe/template/update.html'
 
 class TemplateDelete(LoginRequiredMixin, TemplateMixin, DeleteView):
     template_name = 'scribe/confirm_delete.html'

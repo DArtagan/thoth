@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 
 {% block tinymce %}
-{% include "scribe/tinymce.html" %}
+{% include "scribe/tinymce_template.html" %}
 {% endblock tinymce %}
 
 {% block content %}
@@ -11,6 +11,7 @@
   {% csrf_token %}
   {% bootstrap_form form %}
   <button class="btn btn-primary" type="submit">Ok</button>
+  <a class="btn" href="{{ object.get_delete_url }}">Delete</a>
 </form>
 <iframe id="form_target" name="form_target" style="display:none"></iframe>
 <form id="my_form" action="/scribe/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
