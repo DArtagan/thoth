@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from tinymce.models import HTMLField
 
 class Template(models.Model):
     name = models.CharField(max_length=50)
@@ -47,7 +46,7 @@ class Email(models.Model):
     date_edited = models.DateField(auto_now=True)
     template = models.ForeignKey(Template)
     header = models.ForeignKey(Header)
-    content = HTMLField(blank=True)
+    content = models.TextField(blank=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='creator')
 
     class Meta:
