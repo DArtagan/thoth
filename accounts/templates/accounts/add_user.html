@@ -8,7 +8,7 @@ Add User
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {% bootstrap_form form set_required=False %}
         {% buttons submit="Submit" %}{% endbuttons %}
     </form>
 {% endblock %}

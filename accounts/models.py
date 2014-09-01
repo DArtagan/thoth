@@ -1,6 +1,6 @@
 from django.db import models
-
 from authtools.models import AbstractNamedUser
+from django.core.urlresolvers import reverse
 
 class User(AbstractNamedUser):
 
@@ -9,6 +9,12 @@ class User(AbstractNamedUser):
 
     class Meta:
         db_table = 'auth_user'
+        permissions = (
+            ('promote_user', 'Manage promotions'),
+        )
+
+    def get_delete_url(self):
+        return reverse('accounts:delete_user', args=[self.pk])
 
     def __unicode__(self):
         return self.name

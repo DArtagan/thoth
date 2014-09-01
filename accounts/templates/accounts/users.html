@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load guardian_tags %}
+{% load promotion_tags %}
+
+{% block add_link %}
+  <li>
+    <a href="{% url 'accounts:add_user' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+  </li>
+{% endblock %}
+
+{% block content %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Email</th>
+        {% if perms.accounts.manager_promotions %}
+          <th>Promote/Demote</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+        {% if object.pk >= 0%}
+          <tr>
+            <td>{{ object }}</td>
+            <td><a href="mailto:{{object.email}}">{{ object.email }}</a></td>
+            {% if perms.accounts.promote_user %}
+              <td>{{ "<span class=\"glyphicon glyphicon-plus\"></span>"|promote:object }}/{{ "<span class=\"glyphicon glyphicon-minus\"></span>"|demote:object }}</td>
+            {% endif %}
+            {% if perms.accounts.delete_user %}
+            <td><a href="{{ object.get_delete_url }}">Remove</a></td>
+            {% endif %}
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

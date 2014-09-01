@@ -1,0 +1,17 @@
+{% autoescape off %}
+Welcome to Thoth @ newsletters.minesalumni.com
+
+Thoth tries to make preparing emails for distribution through iModules easier.  For a unified look it allows for the use of consistent templates and headers.
+
+As a new user, you're receiving this e-mail regarding your new user account at newsletters.minesalumni.com.
+
+Please go to the following page and choose a new password:
+{% block reset_link %}
+{{ protocol }}://{{ domain }}{% url 'accounts:password_reset_confirm' uidb64=uid token=token %}
+{% endblock %}
+
+Your username is this email address.
+
+Thanks for using our site!
+
+{% endautoescape %}
