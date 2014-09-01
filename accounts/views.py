@@ -46,6 +46,7 @@ class AddUser(LoginRequiredMixin, FormView):
 
 
         if reset_password:
+            print(form.data['email'])
             reset_form = PasswordResetForm({'email': form.data['email']})
             assert reset_form.is_valid()
             reset_form.save(
