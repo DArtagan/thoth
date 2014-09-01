@@ -41,7 +41,9 @@
               <ul class="dropdown-menu">
                 <li><a href="/accounts/update_profile">Update Profile</a></li>
                 <li><a href="/accounts/password_reset">Reset Password</a></li>
+                {% if user.is_authenticated %}
                 <li><a href="/accounts/logout">Logout</a></li>
+                {% endif %}
               </ul>
             </li>
           </ul>
