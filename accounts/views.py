@@ -4,6 +4,8 @@ from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from guardian.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import permission_required
 from django.utils.crypto import get_random_string
 from django.contrib.auth.forms import PasswordResetForm
 from accounts.forms import UserCreationForm
@@ -19,11 +21,19 @@ class Users(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return User.objects.all().order_by('name')
 
+    @method_decorator(permission_required('accounts.edit_user'))
+    def dispacth(self, *args, **kwargs):
+        return super(Users, self).dispatch(*args, **kwargs)
+
 class AddUser(LoginRequiredMixin, FormView):
     form_class = UserCreationForm
     model = User
     template_name = 'accounts/add_user.html'
     success_url = '/accounts/users/'
+
+    @method_decorator(permission_required('accounts.add_user'))
+    def dispacth(self, *args, **kwargs):
+        return super(AddUser, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         if not form.data['password1']:

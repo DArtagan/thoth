@@ -9,9 +9,6 @@ class User(AbstractNamedUser):
 
     class Meta:
         db_table = 'auth_user'
-        permissions = (
-            ('promote_user', 'Manage promotions'),
-        )
 
     def get_delete_url(self):
         return reverse('accounts:delete_user', args=[self.pk])
