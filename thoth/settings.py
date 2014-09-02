@@ -97,7 +97,7 @@ TEMPLATE_DIRS = (
 )
 
 # Web Domain
-WEB_URL = 'http://127.0.0.1:8000'
+WEB_URL = '127.0.0.1:8000'
 
 # Static
 STATIC_URL = '/static/'
@@ -118,7 +118,7 @@ if os.getcwd() == "/app":
     DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://secure-thicket-4638.herokuapp.com'
+    WEB_URL = 'secure-thicket-4638.herokuapp.com'
     DEFAULT_FROM_EMAIL = 'app21424083@heroku.com'
     MANDRILL_API_KEY = "d2HU9QVfRIiIamNvr0AbVA"
     EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"

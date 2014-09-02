@@ -8,8 +8,10 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
 from django.utils.crypto import get_random_string
 from django.contrib.auth.forms import PasswordResetForm
+from authtools.views import PasswordResetView
 from accounts.forms import UserCreationForm
 from guardian.models import Group
+from thoth.settings import WEB_URL
 
 from accounts.models import User
 from accounts.forms import ProfileForm
@@ -44,6 +46,7 @@ class AddUser(LoginRequiredMixin, FormView):
         else:
             reset_password = False
 
+        form.save()
 
         if reset_password:
             print(form.data['email'])
@@ -52,8 +55,9 @@ class AddUser(LoginRequiredMixin, FormView):
             reset_form.save(
                 subject_template_name='registration/account_creation_subject.txt',
                 email_template_name='registration/account_creation_email.html',
+                domain_override=WEB_URL,
             )
-        form.save()
+            reset_form = PasswordResetView
         return super(AddUser, self).form_valid(form)
 
 class DeleteUser(LoginRequiredMixin, DeleteView):
