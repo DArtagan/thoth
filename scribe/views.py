@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from guardian.shortcuts import assign_perm, get_objects_for_user
 from guardian.mixins import LoginRequiredMixin
-from django.conf import settings
+from django.conf.settings import WEB_URL
 from guardian.models import Group
 
 from scribe.models import Template, Header, Email
@@ -27,7 +27,7 @@ def upload(request):
         form = UploadImage(request.POST, request.FILES)
         if form.is_valid():
             image = form.save()
-            return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s').closest('.mce-window').find('.mce-primary').click();</script>" % (settings.WEB_URL + image.get_absolute_url()))
+            return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s').closest('.mce-window').find('.mce-primary').click();</script>" % ('http://' + WEB_URL + image.get_absolute_url()))
         print('invalid')
         return HttpResponse("<script>alert('%s');</script>" % escapejs('\n'.join([v[0] for k, v in form.errors.items()])))
     return HttpResponseForbidden('Allowed only via POST')
@@ -51,7 +51,7 @@ class EmailDetail(LoginRequiredMixin, EmailMixin, DetailView):
         context = super(EmailDetail, self).get_context_data(**kwargs)
         contents = context['object'].template.template
         contents = contents.replace("{ CONTENTS HERE }", context['object'].content)
-        contents = contents.replace("{ HEADER IMAGE }", (settings.WEB_URL + context['object'].header.image.url))
+        contents = contents.replace("{ HEADER IMAGE }", ('http://' + WEB_URL + context['object'].header.image.url))
         contents = contents.replace("{ HEADER NAME }", context['object'].header.name)
         contents = contents.replace("{ HEADER LINK }", context['object'].header.link)
         context['render'] = contents
