@@ -79,7 +79,7 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
         return get_object_or_404(User, pk=self.request.user.pk)
 
 @login_required
-@method_decorator(permission_required('accounts.change_user'))
+@permission_required('accounts.change_user')
 def promote(request, pk):
     user = User.objects.get(pk=pk)
     g = Group.objects.get(name='csmaa')
@@ -87,7 +87,7 @@ def promote(request, pk):
     return HttpResponseRedirect(reverse('accounts:users'))
 
 @login_required
-@method_decorator(permission_required('accounts.change_user'))
+@permission_required('accounts.change_user')
 def demote(request, pk):
     user = User.objects.get(pk=pk)
     g = Group.objects.get(name='csmaa')

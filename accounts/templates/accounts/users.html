@@ -17,7 +17,7 @@
       <tr>
         <th></th>
         <th>Email</th>
-        {% if perms.accounts.manager_promotions %}
+        {% if perms.accounts.change_user %}
           <th>Promote/Demote</th>
         {% endif %}
       </tr>
@@ -28,7 +28,7 @@
           <tr>
             <td>{{ object }}</td>
             <td><a href="mailto:{{object.email}}">{{ object.email }}</a></td>
-            {% if perms.accounts.promote_user %}
+            {% if perms.accounts.change_user %}
               <td>{{ "<span class=\"glyphicon glyphicon-plus\"></span>"|promote:object }}/{{ "<span class=\"glyphicon glyphicon-minus\"></span>"|demote:object }}</td>
             {% endif %}
             {% if perms.accounts.delete_user %}
