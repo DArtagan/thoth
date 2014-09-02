@@ -6,6 +6,7 @@ Add User
 {% endblock %}
 
 {% block content %}
+    <p>Leave the password fields blank to have a create password email sent to the new user.</p>
     <form action="" method="post">
         {% csrf_token %}
         {% bootstrap_form form set_required=False %}
