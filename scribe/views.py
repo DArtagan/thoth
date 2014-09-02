@@ -6,7 +6,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from guardian.shortcuts import assign_perm, get_objects_for_user
 from guardian.mixins import LoginRequiredMixin
-from django.conf.settings import WEB_URL
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import permission_required
+from thoth.settings import WEB_URL
 from guardian.models import Group
 
 from scribe.models import Template, Header, Email
@@ -90,6 +92,10 @@ class TemplateDetail(LoginRequiredMixin, TemplateMixin, DetailView):
 class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
     template_name = 'scribe/template/create.html'
 
+    @method_decorator(permission_required('scribe.add_template'))
+    def dispatch(self, *args, **kwargs):
+        return super(TemplateCreate, self).dispatch(*args, **kwargs)
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.creator = self.request.user
@@ -99,10 +105,19 @@ class TemplateCreate(LoginRequiredMixin, TemplateMixin, CreateView):
 class TemplateUpdate(LoginRequiredMixin, TemplateMixin, UpdateView):
     template_name = 'scribe/template/update.html'
 
+    @method_decorator(permission_required('scribe.change_template'))
+    def dispatch(self, *args, **kwargs):
+        return super(TemplateUpdate, self).dispatch(*args, **kwargs)
+
 class TemplateDelete(LoginRequiredMixin, TemplateMixin, DeleteView):
     template_name = 'scribe/confirm_delete.html'
+
+    @method_decorator(permission_required('scribe.delete_template'))
+    def dispatch(self, *args, **kwargs):
+        return super(TemplateDelete, self).dispatch(*args, **kwargs)
+
     def get_success_url(self):
-        return reverse('template_index')
+        return reverse('scribe:template:template_index')
 
 # Header
 class HeaderMixin(object):
@@ -119,6 +134,10 @@ class HeaderDetail(LoginRequiredMixin, HeaderMixin, DetailView):
 class HeaderCreate(LoginRequiredMixin, HeaderMixin, CreateView):
     template_name = 'scribe/create.html'
 
+    @method_decorator(permission_required('scribe.add_header'))
+    def dispatch(self, *args, **kwargs):
+        return super(HeaderCreate, self).dispatch(*args, **kwargs)
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.creator = self.request.user
@@ -128,8 +147,17 @@ class HeaderCreate(LoginRequiredMixin, HeaderMixin, CreateView):
 class HeaderUpdate(LoginRequiredMixin, HeaderMixin, UpdateView):
     template_name = 'scribe/update.html'
 
+    @method_decorator(permission_required('scribe.change_header'))
+    def dispatch(self, *args, **kwargs):
+        return super(HeaderUpdate, self).dispatch(*args, **kwargs)
+
 class HeaderDelete(LoginRequiredMixin, HeaderMixin, DeleteView):
     template_name = 'scribe/confirm_delete.html'
+
+    @method_decorator(permission_required('scribe.delete_header'))
+    def dispatch(self, *args, **kwargs):
+        return super(HeaderDelete, self).dispatch(*args, **kwargs)
+
     def get_success_url(self):
-        return reverse('header_index')
+        return reverse('scribe:header:header_index')
 

@@ -23,8 +23,8 @@ class Users(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return User.objects.all().order_by('name')
 
-    @method_decorator(permission_required('accounts.edit_user'))
-    def dispacth(self, *args, **kwargs):
+    @method_decorator(permission_required('accounts.change_user'))
+    def dispatch(self, *args, **kwargs):
         return super(Users, self).dispatch(*args, **kwargs)
 
 class AddUser(LoginRequiredMixin, FormView):
@@ -34,7 +34,7 @@ class AddUser(LoginRequiredMixin, FormView):
     success_url = '/accounts/users/'
 
     @method_decorator(permission_required('accounts.add_user'))
-    def dispacth(self, *args, **kwargs):
+    def dispatch(self, *args, **kwargs):
         return super(AddUser, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
@@ -65,6 +65,10 @@ class DeleteUser(LoginRequiredMixin, DeleteView):
     template_name = 'accounts/confirm_delete.html'
     success_url = '/accounts/users/'
 
+    @method_decorator(permission_required('accounts.delete_user'))
+    def dispatch(self, *args, **kwargs):
+        return super(DeleteUser, self).dispatch(*args, **kwargs)
+
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/update_profile.html'
     form_class = ProfileForm
@@ -75,6 +79,7 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
         return get_object_or_404(User, pk=self.request.user.pk)
 
 @login_required
+@method_decorator(permission_required('accounts.change_user'))
 def promote(request, pk):
     user = User.objects.get(pk=pk)
     g = Group.objects.get(name='csmaa')
@@ -82,6 +87,7 @@ def promote(request, pk):
     return HttpResponseRedirect(reverse('accounts:users'))
 
 @login_required
+@method_decorator(permission_required('accounts.change_user'))
 def demote(request, pk):
     user = User.objects.get(pk=pk)
     g = Group.objects.get(name='csmaa')

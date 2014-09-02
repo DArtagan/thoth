@@ -30,7 +30,7 @@
             <li><a href="{% url 'scribe:email:email_index' %}">Emails</a></li>
             <li><a href="{% url 'scribe:template:template_index' %}">Templates</a></li>
             <li><a href="{% url 'scribe:header:header_index' %}">Headers</a></li>
-            {% if perms.accounts.user_promotions %}<li><a href="/accounts/users">Users</a></li>{% endif %}
+            {% if perms.accounts.change_user %}<li><a href="/accounts/users">Users</a></li>{% endif %}
 
           </ul>
           <ul class="nav navbar-nav navbar-right">
